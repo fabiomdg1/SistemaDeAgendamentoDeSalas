@@ -1,4 +1,4 @@
-package Principal;
+package sistemaAgendamentoSala;
 
 public class Principal {
 
