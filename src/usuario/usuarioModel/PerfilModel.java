@@ -1,4 +1,4 @@
-package usuarioModel;
+package usuario.usuarioModel;
 
 public class PerfilModel {
 	
