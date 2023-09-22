@@ -6,12 +6,11 @@ import java.sql.SQLException;
 
 public class ConexaoBD {
 
-    private static final String URL = "jdbc:mysql:agendasalas.mysql.dbaas.com.br";
+    private static final String URL = "jdbc:mysql://agendasalas.mysql.dbaas.com.br:3306/agendasalas";
     private static final String USUARIO = "agendasalas";
-    private static final String SENHA = "";
+    private static final String SENHA = "SenhaSenai123@";
 
     
-    //Método de Conexão com banco de dados
     public static Connection obterConexao() {
         try {
             return DriverManager.getConnection(URL, USUARIO, SENHA);
@@ -20,14 +19,12 @@ public class ConexaoBD {
         }
     }
 
-    //Método para fechar conexão com banco de dados
     public static void fecharConexao(Connection conexao) {
         try {
             if (conexao != null && !conexao.isClosed()) {
                 conexao.close();
             }
         } catch (SQLException e) {
-            // Tratar o erro de fechamento da conexão, se necessário
         }
     }
 }

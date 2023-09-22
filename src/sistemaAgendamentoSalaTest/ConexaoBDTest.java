@@ -13,6 +13,7 @@ public class ConexaoBDTest {
 		
 	}
 	
+	//Testando a conexao com o banco de dados
 	public static void testeDeConexaoBD(){		
 		
 		 try {
