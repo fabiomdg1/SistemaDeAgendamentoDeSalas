@@ -6,7 +6,7 @@ import dao.ClasseDao;
 import models.Usuario;
 import utilidades.ConexaoBD;
 
-public class ObterTodosUsuariosText {
+public class ObterTodosUsuariosTest {
 
 	public static void main(String[] args) {
 		
@@ -16,7 +16,7 @@ public class ObterTodosUsuariosText {
         // Chama o método para obter todos os usuários
         List<Usuario> usuarios = dao.obterTodosUsuarios();
         
-        System.out.println("Lista do usuários");
+        System.out.println("Lista de usuários");
 
         // Imprime os usuários
         for (Usuario usuario : usuarios) {

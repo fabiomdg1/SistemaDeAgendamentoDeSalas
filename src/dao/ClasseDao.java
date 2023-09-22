@@ -32,7 +32,7 @@ public class ClasseDao{
 	    	        int rowsAffected = preparedStatement.executeUpdate();
 	    	        
 	    	        if (rowsAffected > 0) {
-	    	            System.out.println("Usuário adicionado com sucesso.");
+	    	            System.out.println("Usuário cadastrado com sucesso.");
 	    	        } else {
 	    	            System.out.println("Falha ao adicionar o usuário.");
 	    	        }
