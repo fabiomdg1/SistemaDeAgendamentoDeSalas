@@ -40,10 +40,13 @@ public class Main {
 			
 			switch(opcao){
 			case 1:
-					cadastrarUsuario();
+				cadastrarUsuario();
 				break;
 			case 2:
-					obterTodosUsuarios();
+				obterTodosUsuarios();
+				break;
+			case 3:
+				obterUmUsuario();
 				break;
 			case 0:
 					controle = 0;
@@ -79,6 +82,25 @@ public class Main {
             System.out.println("Nome: " + usuario.getNome());
             System.out.println("Matrícula: " + usuario.getMatricula());
             System.out.println("===========================");
+        }
+
+        ConexaoBD.fecharConexao(connection);
+	}
+	
+	public static void obterUmUsuario(){
+		int idUsuarioProcurado = 1;
+	    System.out.print("Informe o ID do usuário: ");
+		idUsuarioProcurado = scanner.nextInt();
+		  
+        Usuario usuario = dao.obterUsuarioPorId(idUsuarioProcurado);
+
+        if (usuario != null) {
+            System.out.println("Usuário encontrado:");
+            System.out.println("ID: " + usuario.getId());
+            System.out.println("Nome: " + usuario.getNome());
+            System.out.println("Matrícula: " + usuario.getMatricula());
+        } else {
+            System.out.println("Usuário não encontrado.");
         }
 
         ConexaoBD.fecharConexao(connection);

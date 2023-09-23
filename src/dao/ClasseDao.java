@@ -78,7 +78,37 @@ public class ClasseDao{
 
 	    public Usuario obterUsuarioPorId(int id) {
 
-	        return null;
+	    	String query = "SELECT * FROM usuario WHERE id = ?";
+	    	PreparedStatement preparedStatement = null;
+	    	ResultSet resultSet = null;
+	    	Usuario usuario = null;
+
+	    	try {
+	    		preparedStatement = connection.prepareStatement(query);
+	    	    preparedStatement.setInt(1, id);
+	    	    resultSet = preparedStatement.executeQuery();
+	    	    if (resultSet.next()) {
+	    	    	usuario = new Usuario();
+	    	        usuario.setId(resultSet.getInt("id"));
+	    	        usuario.setNome(resultSet.getString("nome"));
+	    	        usuario.setMatricula(resultSet.getString("matricula"));
+	    	     }
+	    	 } catch (SQLException e) {
+	    		 e.printStackTrace();
+	    	    } finally {
+	    	    	try {
+	    	    		if (resultSet != null) {
+	    	    			resultSet.close();
+	    	            }
+	    	            if (preparedStatement != null) {
+	    	            	preparedStatement.close();
+	    	            }
+	    	         } catch (SQLException e) {
+	    	        	 e.printStackTrace();
+	    	         }
+	    	     }
+
+	    	 return usuario;	    
 	    }
 
 	    
