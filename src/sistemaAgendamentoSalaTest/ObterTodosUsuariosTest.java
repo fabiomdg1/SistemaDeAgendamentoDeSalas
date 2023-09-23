@@ -13,7 +13,6 @@ public class ObterTodosUsuariosTest {
         Connection connection = ConexaoBD.obterConexao();
         ClasseDao dao = new ClasseDao(connection);
 
-        // Chama o método para obter todos os usuários
         List<Usuario> usuarios = dao.obterTodosUsuarios();
         
         System.out.println("Lista de usuários");
@@ -26,7 +25,6 @@ public class ObterTodosUsuariosTest {
             System.out.println("===========================");
         }
 
-        // Fecha a conexão com o banco de dados
         ConexaoBD.fecharConexao(connection);
 
 	}

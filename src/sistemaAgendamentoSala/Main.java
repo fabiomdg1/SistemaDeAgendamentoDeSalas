@@ -2,6 +2,7 @@ package sistemaAgendamentoSala;
 
 import java.sql.Connection;
 import java.time.Duration;
+import java.util.List;
 import java.util.Scanner;
 
 import dao.ClasseDao;
@@ -10,14 +11,14 @@ import utilidades.ConexaoBD;
 
 
 public class Main {
+	
+	static Connection connection = ConexaoBD.obterConexao();
+    static ClasseDao dao = new ClasseDao(connection);
 
 	public static Scanner scanner = new Scanner(System.in);
 	public static Usuario usuario = new Usuario();
 
-	public static void main(String[] args) {
-		
-		Connection connection = ConexaoBD.obterConexao();
-        ClasseDao dao = new ClasseDao(connection);
+	public static void main(String[] args) {		
        
         int controle = -1;
 		int opcao = 0;
@@ -40,17 +41,16 @@ public class Main {
 			switch(opcao){
 			case 1:
 					cadastrarUsuario();
-					dao.adicionarUsuario(usuario);
-			        ConexaoBD.fecharConexao(connection);
+				break;
+			case 2:
+					obterTodosUsuarios();
 				break;
 			case 0:
 					controle = 0;
 					System.out.println("Obrigado!");					
 				break;
 			}
-
-		}
-				
+		}				
 	}
 	
 	
@@ -58,18 +58,29 @@ public class Main {
 		String nome;
 		String matricula;
 		
-		System.out.print("Digite o nome do usuário: ");	
-		//nome = scanner.next();
+		System.out.print("Digite o nome do usuário: ");		
 		usuario.setNome(scanner.next());
 		
-		System.out.print("Digite a matrícula do usuário: ");
-		//matricula = scanner.next();
-		usuario.setMatricula(scanner.next());
+		System.out.print("Digite a matrícula do usuário: ");		
+		usuario.setMatricula(scanner.next());	
 		
-		//usuario.setNome(nome);
-		//usuario.setMatricula(matricula);
-	
-		
+		dao.adicionarUsuario(usuario);
+        ConexaoBD.fecharConexao(connection);
 	}
+	
+	public static void obterTodosUsuarios(){
+		List<Usuario> usuarios = dao.obterTodosUsuarios();
+        
+        System.out.println("Lista de usuários");
 
+        // Imprime os usuários
+        for (Usuario usuario : usuarios) {
+            System.out.println("ID: " + usuario.getId());
+            System.out.println("Nome: " + usuario.getNome());
+            System.out.println("Matrícula: " + usuario.getMatricula());
+            System.out.println("===========================");
+        }
+
+        ConexaoBD.fecharConexao(connection);
+	}
 }
