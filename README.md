@@ -4,6 +4,7 @@
 Sistema de agendamento de salas
 
 ## Funcionalidades
+* Autenticação de usuários
 * Cadastro, busca, atualização e exclusão de usuários
 * Cadastro, busca, atualização e exclusão de salas
 
