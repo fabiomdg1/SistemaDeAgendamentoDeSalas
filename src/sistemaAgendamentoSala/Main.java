@@ -105,4 +105,14 @@ public class Main {
 
         ConexaoBD.fecharConexao(connection);
 	}
+	
+	public static void atualizarUsuario(){
+		
+		int idUsuarioProcurado;
+	    System.out.print("Informe o ID do usuário: ");
+		idUsuarioProcurado = scanner.nextInt();
+		
+		Usuario usuario = dao.atualizarUsuario(idUsuarioProcurado);
+		
+	}
 }

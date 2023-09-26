@@ -13,11 +13,21 @@ public class ClasseDao{
 
 	    private Connection connection;
 
+	    public ClasseDao(){
+	    	
+	    }
 	    
 	    public ClasseDao(Connection connection){
 	    	this.connection = connection;
 	    }  
 	    
+	    public void cadastrarTeste(){
+	    	System.out.println("Teste de Cadastro");
+	    }
+	    
+	    public void verificaLogin(){
+	    	System.out.println("Verificando login");
+	    }
 
 	    public void adicionarUsuario(Usuario usuario) {
 	    	    try {
@@ -77,15 +87,19 @@ public class ClasseDao{
 	    
 
 	    public Usuario obterUsuarioPorId(int id) {
-
-	    	String query = "SELECT * FROM usuario WHERE id = ?";
-	    	PreparedStatement preparedStatement = null;
 	    	ResultSet resultSet = null;
 	    	Usuario usuario = null;
 
+
 	    	try {
-	    		preparedStatement = connection.prepareStatement(query);
+	    	String sql = "SELECT * FROM usuario WHERE id = ?";
+	    	
+	    	PreparedStatement preparedStatement = connection.prepareStatement(sql);
+	    	
+	    	
+	    	
 	    	    preparedStatement.setInt(1, id);
+	    	    
 	    	    resultSet = preparedStatement.executeQuery();
 	    	    if (resultSet.next()) {
 	    	    	usuario = new Usuario();
@@ -94,28 +108,40 @@ public class ClasseDao{
 	    	        usuario.setMatricula(resultSet.getString("matricula"));
 	    	     }
 	    	 } catch (SQLException e) {
-	    		 e.printStackTrace();
-	    	    } finally {
-	    	    	try {
-	    	    		if (resultSet != null) {
-	    	    			resultSet.close();
-	    	            }
-	    	            if (preparedStatement != null) {
-	    	            	preparedStatement.close();
-	    	            }
-	    	         } catch (SQLException e) {
-	    	        	 e.printStackTrace();
-	    	         }
-	    	     }
-
-	    	 return usuario;	    
+	    		 e.printStackTrace();	    	    
+	    	}
+	    	return usuario;
 	    }
 
 	    
-	    public void atualizarUsuario(Usuario usuario) {
+	    public Usuario atualizarUsuario(int id) {
+	    	ResultSet resultSet = null;
+	    	Usuario usuario = null;
 
+
+	    	try {
+	    	String sql = "SELECT * FROM usuario WHERE id = ?";
+	    	
+	    	PreparedStatement preparedStatement = connection.prepareStatement(sql);
+	    	
+	    	
+	    	
+	    	    preparedStatement.setInt(1, id);
+	    	    
+	    	    resultSet = preparedStatement.executeQuery();
+	    	    if (resultSet.next()) {
+	    	    	usuario = new Usuario();
+	    	        usuario.setId(resultSet.getInt("id"));
+	    	        usuario.setNome(resultSet.getString("nome"));
+	    	        usuario.setMatricula(resultSet.getString("matricula"));
+	    	     }
+	    	 } catch (SQLException e) {
+	    		 e.printStackTrace();	    	    
+	    	}
+	    	return usuario;
 	    }
-
+	    
+	    
 	    public void deletarUsuario(int id) {
 
 	    }    
