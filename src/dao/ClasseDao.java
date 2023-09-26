@@ -25,8 +25,11 @@ public class ClasseDao{
 	    	System.out.println("Teste de Cadastro");
 	    }
 	    
-	    public void verificaLogin(){
-	    	System.out.println("Verificando login");
+	    public void verificaLogin(String usuarioDigitado){
+	    	String usuario = "";
+	    	usuario = usuarioDigitado;
+	    	System.out.println("Verificando login");	    	
+	    	System.out.println("O usuário digitado foi: " + usuario);
 	    }
 
 	    public void adicionarUsuario(Usuario usuario) {

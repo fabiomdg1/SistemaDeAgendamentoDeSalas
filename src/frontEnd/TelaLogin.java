@@ -23,7 +23,7 @@ public class TelaLogin extends JFrame {
 
 		private JPanel contentPane;
 		private JTextField txtSenha;
-		private JTextField txtusuario;
+		private JTextField txtUsuario;
 		
 		ClasseDao dao = new ClasseDao();
 		
@@ -70,10 +70,10 @@ public class TelaLogin extends JFrame {
 			lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 			lblUsuario.setFont(new Font("Arial", Font.BOLD, 15));
 
-			txtusuario = new JTextField();
-			txtusuario.setBounds(98, 111, 315, 20);
-			txtusuario.setColumns(10);
-			txtusuario.setBackground(Color.LIGHT_GRAY);
+			txtUsuario = new JTextField();
+			txtUsuario.setBounds(98, 111, 315, 20);
+			txtUsuario.setColumns(10);
+			txtUsuario.setBackground(Color.LIGHT_GRAY);
 
 			JLabel lblSenha = new JLabel("Senha");
 			lblSenha.setBounds(98, 168, 314, 15);
@@ -92,7 +92,7 @@ public class TelaLogin extends JFrame {
 			btnAvancar.setBackground(Color.DARK_GRAY);
 			
 			btnAvancar.addActionListener(e -> {
-				dao.verificaLogin();
+				dao.verificaLogin(txtUsuario.getText());
 			});
 
 			JLabel lblNãopossuíCadastro = new JLabel("não possuí um cadastro?");
@@ -149,7 +149,7 @@ public class TelaLogin extends JFrame {
 						.addGap(98))
 					.addGroup(gl_conteinerLogin.createSequentialGroup()
 						.addGap(98)
-						.addComponent(txtusuario, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+						.addComponent(txtUsuario, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
 						.addGap(97))
 			);
 			gl_conteinerLogin.setVerticalGroup(
@@ -160,7 +160,7 @@ public class TelaLogin extends JFrame {
 						.addGap(39)
 						.addComponent(lblUsuario, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
 						.addGap(11)
-						.addComponent(txtusuario, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtUsuario, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 						.addGap(26)
 						.addComponent(lblSenha, GroupLayout.PREFERRED_SIZE, 15, Short.MAX_VALUE)
 						.addGap(11)
