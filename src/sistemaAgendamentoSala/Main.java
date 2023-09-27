@@ -12,7 +12,8 @@ import utilidades.ConexaoBD;
 
 public class Main {
 	
-	static Connection connection = ConexaoBD.obterConexao();
+	static Connection connection;
+	
     static ClasseDao dao = new ClasseDao(connection);
 
 	public static Scanner scanner = new Scanner(System.in);
@@ -48,6 +49,14 @@ public class Main {
 			case 3:
 				obterUmUsuario();
 				break;
+			case 4:
+				atualizarUsuario();
+				break;
+			case 5:
+				System.out.println("Digite o id do usuário: ");
+				int id = scanner.nextInt();
+				deletarUsuario(id);
+				break;
 			case 0:
 					controle = 0;
 					System.out.println("Obrigado!");					
@@ -58,20 +67,25 @@ public class Main {
 	
 	
 	public static void cadastrarUsuario(){
-		String nome;
-		String matricula;
 		
 		System.out.print("Digite o nome do usuário: ");		
-		usuario.setNome(scanner.next());
+		usuario.setNome(scanner.next());			
 		
 		System.out.print("Digite a matrícula do usuário: ");		
 		usuario.setMatricula(scanner.next());	
 		
+		System.out.print("Digite um nome de usuário para login no sistema: ");		
+		usuario.setUsuario(scanner.next());	
+		
+		System.out.print("Cadastre uma senha: ");		
+		usuario.setSenha(scanner.next());	
+		
 		dao.adicionarUsuario(usuario);
-        ConexaoBD.fecharConexao(connection);
+
 	}
 	
 	public static void obterTodosUsuarios(){
+		ConexaoBD.obterConexao();
 		List<Usuario> usuarios = dao.obterTodosUsuarios();
         
         System.out.println("Lista de usuários");
@@ -84,10 +98,11 @@ public class Main {
             System.out.println("===========================");
         }
 
-        ConexaoBD.fecharConexao(connection);
+        //ConexaoBD.fecharConexao(connection);
 	}
 	
 	public static void obterUmUsuario(){
+		ConexaoBD.obterConexao();
 		int idUsuarioProcurado = 1;
 	    System.out.print("Informe o ID do usuário: ");
 		idUsuarioProcurado = scanner.nextInt();
@@ -107,12 +122,16 @@ public class Main {
 	}
 	
 	public static void atualizarUsuario(){
-		
+		ConexaoBD.obterConexao();		
 		int idUsuarioProcurado;
 	    System.out.print("Informe o ID do usuário: ");
 		idUsuarioProcurado = scanner.nextInt();
 		
 		Usuario usuario = dao.atualizarUsuario(idUsuarioProcurado);
-		
+		ConexaoBD.fecharConexao(connection);
+	}
+	
+	public static void deletarUsuario(int id){
+		System.out.println("Teste deletar usuário");
 	}
 }

@@ -5,6 +5,8 @@ public class Usuario {
 	private int id;
 	private String nome;
 	private String matricula;
+	private String usuario;
+	private String senha;
 	
 	public String getNome() {
 		return nome;
@@ -24,7 +26,17 @@ public class Usuario {
 	public void setId(int id){
 		this.id = id;
 	}
-	
-	
+	public String getSenha(){
+		return senha;
+	}
+	public void setSenha(String senha){
+		this.senha = senha;
+	}
+	public String getUsuario(){
+		return usuario;
+	}
+	public void setUsuario(String usuario){
+		this.usuario = usuario;
+	}
 	
 }

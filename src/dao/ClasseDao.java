@@ -30,17 +30,23 @@ public class ClasseDao{
 	    	usuario = usuarioDigitado;
 	    	System.out.println("Verificando login");	    	
 	    	System.out.println("O usuário digitado foi: " + usuario);
+	    	
+	    	
+	    	
 	    }
 
 	    public void adicionarUsuario(Usuario usuario) {
+	    	connection = ConexaoBD.obterConexao();
 	    	    try {
 
-	    	        String sql = "INSERT INTO usuario (nome, matricula) VALUES (?, ?)";
-	    	        
+	    	        String sql = "INSERT INTO usuario (nome, matricula,usuario, senha) VALUES (?, ?, ?, ?)";
+	    	        System.out.println(sql);
 	    	        PreparedStatement preparedStatement = connection.prepareStatement(sql);
 	    	        
 	    	        preparedStatement.setString(1, usuario.getNome());
 	    	        preparedStatement.setString(2, usuario.getMatricula());
+	    	        preparedStatement.setString(3, usuario.getUsuario());
+	    	        preparedStatement.setString(4, usuario.getSenha());
 	    	        
 	    	        int rowsAffected = preparedStatement.executeUpdate();
 	    	        
@@ -51,36 +57,43 @@ public class ClasseDao{
 	    	        }
 	    	        	    	        
 	    	        preparedStatement.close();
+	    	        ConexaoBD.fecharConexao(connection);
 	    	    } catch (SQLException e) {
 	    	        e.printStackTrace();
-	    	        System.out.println("Erro ao inserir usuário");
-	    	        
+	    	        System.out.println("Erro ao inserir usuário");	    	        
 	    	    }
+	    	    
 	    }
 	    
 	    public List<Usuario> obterTodosUsuarios() {
+	    	connection = ConexaoBD.obterConexao();    	
 	        List<Usuario> usuarios = new ArrayList<>();
 	        try {
-	            String sql = "SELECT * FROM usuario";
+	            
+	        	String sql = "SELECT * FROM usuario";
 	            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
 	            ResultSet resultSet = preparedStatement.executeQuery();
 
 	            while (resultSet.next()) {
 	                int id = resultSet.getInt("id");
 	                String nome = resultSet.getString("nome");
 	                String matricula = resultSet.getString("matricula");
+	                String nomeDeUsuario = resultSet.getString("usuario");
+	                String senha = resultSet.getString("senha");
 
 	                Usuario usuario = new Usuario();
 	                usuario.setId(id);
 	                usuario.setNome(nome);
 	                usuario.setMatricula(matricula);
+	                usuario.setUsuario(nomeDeUsuario);
+	                usuario.setSenha(senha);
 
 	                usuarios.add(usuario);
 	            }
 
 	            resultSet.close();
 	            preparedStatement.close();
+	            ConexaoBD.fecharConexao(connection);
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            System.out.println("Erro ao buscar todos os usuários");
@@ -90,6 +103,7 @@ public class ClasseDao{
 	    
 
 	    public Usuario obterUsuarioPorId(int id) {
+	    	connection = ConexaoBD.obterConexao();
 	    	ResultSet resultSet = null;
 	    	Usuario usuario = null;
 
@@ -110,6 +124,7 @@ public class ClasseDao{
 	    	        usuario.setNome(resultSet.getString("nome"));
 	    	        usuario.setMatricula(resultSet.getString("matricula"));
 	    	     }
+	    	    ConexaoBD.fecharConexao(connection);
 	    	 } catch (SQLException e) {
 	    		 e.printStackTrace();	    	    
 	    	}
@@ -118,6 +133,7 @@ public class ClasseDao{
 
 	    
 	    public Usuario atualizarUsuario(int id) {
+	    	connection = ConexaoBD.obterConexao();
 	    	ResultSet resultSet = null;
 	    	Usuario usuario = null;
 
@@ -138,6 +154,7 @@ public class ClasseDao{
 	    	        usuario.setNome(resultSet.getString("nome"));
 	    	        usuario.setMatricula(resultSet.getString("matricula"));
 	    	     }
+	    	    ConexaoBD.fecharConexao(connection);
 	    	 } catch (SQLException e) {
 	    		 e.printStackTrace();	    	    
 	    	}
@@ -146,6 +163,9 @@ public class ClasseDao{
 	    
 	    
 	    public void deletarUsuario(int id) {
+	    	connection = ConexaoBD.obterConexao();
+	    	
+	    	ConexaoBD.fecharConexao(connection);
 
 	    }    
 }
