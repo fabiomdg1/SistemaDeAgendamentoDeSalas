@@ -91,8 +91,9 @@ public class TelaLogin extends JFrame {
 			btnAvancar.setForeground(Color.WHITE);
 			btnAvancar.setBackground(Color.DARK_GRAY);
 			
+			//*************Botão Avançar*************//
 			btnAvancar.addActionListener(e -> {
-				dao.verificaLogin(txtUsuario.getText());
+				dao.verificaLogin(txtUsuario.getText(), txtSenha.getText());
 			});
 
 			JLabel lblNãopossuíCadastro = new JLabel("não possuí um cadastro?");
@@ -106,6 +107,8 @@ public class TelaLogin extends JFrame {
 			btnCadastrar.setForeground(Color.WHITE);
 			btnCadastrar.setBackground(Color.DARK_GRAY);
 			
+			
+			//****************Botão Cadastrar****************//
 			btnCadastrar.addActionListener(e -> {
 			    dao.cadastrarTeste();
 			});

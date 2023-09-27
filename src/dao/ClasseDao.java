@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import models.Usuario;
 import utilidades.ConexaoBD;
 
@@ -25,14 +27,35 @@ public class ClasseDao{
 	    	System.out.println("Teste de Cadastro");
 	    }
 	    
-	    public void verificaLogin(String usuarioDigitado){
-	    	String usuario = "";
-	    	usuario = usuarioDigitado;
-	    	System.out.println("Verificando login");	    	
-	    	System.out.println("O usuário digitado foi: " + usuario);
-	    	
-	    	
-	    	
+	    public void verificaLogin(String usuarioDigitado, String senha){
+	    	System.out.println("Login");
+	    	connection = ConexaoBD.obterConexao();
+	    	String senhaBanco = "";
+	    
+	    	try {
+	    		String sql = "select senha from usuario where usuario = ?";		    	
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setString(1, usuarioDigitado);
+				ResultSet resultSet = preparedStatement.executeQuery();			
+				
+				if(resultSet.next()){
+					senhaBanco = resultSet.getString("senha");
+					System.out.println("Senha Digitada: " + senha);
+					System.out.println("Senha Banco: " + senhaBanco);
+					if(senhaBanco.equals(senha.toString())){
+						JOptionPane.showMessageDialog(null, "Login efetuado com sucesso");	
+						System.out.println("Ok");
+					}else{
+						System.out.println("Erro");
+						JOptionPane.showMessageDialog(null, "Usuário ou Senha Incorretos !");
+					}
+				}else{
+					System.out.println("Teste login");	
+				}						
+				
+			} catch (SQLException e) {				
+				e.printStackTrace();
+			}
 	    }
 
 	    public void adicionarUsuario(Usuario usuario) {
